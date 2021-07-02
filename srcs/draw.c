@@ -6,47 +6,88 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:42:11 by mrochet           #+#    #+#             */
-/*   Updated: 2021/06/30 17:38:56 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/02 16:34:31 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+double	mod(double i)
+{
+	if (i < 0)
+		return (-i);
+	return (i);
+}
+
+double	max(double a, double b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+void	calc(t_data *data, double *x, double *y, int z)
+{
+	*x = (*x - *y) * cos(0.8);
+	*y = (*x + *y) * sin(0.8) - z;
+	*x *= 20;
+	*y *= 20;
+	*x += 1000;
+	*y += 700;
+}
 
 void bresenham(double x1, double y1, t_data *data)
 {
 	long long int z;
 	long long int z1;
 
-	printf(" x = %d x1 = %d y = %d y1 = %d \n", (int)data->x, (int)x1, (int)data->y, (int)y1);
-
 	z = data->array[(int)data->y][(int)data->x];
 	z1 = data->array[(int)y1][(int)x1];
+	data->color = 0xFFFFFF;
+	if (z || z1)
+		data->color = 0xFF0000 + z * 0x00FF00 + z * 0x0000FF;
+	calc(data, &data->x, &data->y, z);
+	calc(data, &x1, &y1, z1);
+	z1 = max(mod(x1 - data->x), mod(y1 - data->y));
+	data->x -= data->width / 2.0;
+	data->y -= data->height / 2.0;
+	x1 -= data->width / 2.0;
+	y1 -= data->height / 2.0;
+	while ((int)(data->x - x1) || (int)(data->y - y1))
+	{
+		if ((int)data->x < data->image.line_length && (int)data->x >= 0 && \
+				(int)data->y < data->ywin && (int)data->y >= 0)
+			data->image.addr[(int)(((int)data->y * data->image.line_length) \
+					+ (int)data->x)] = (data->color);
+		data->x += (x1 - data->x) / z1;
+		data->y += (y1 - data->y) / z1;
+	}
 }
 
-void draw(t_data *data)
+void draw(t_data *d)
 {
 	double t_x;
 	double t_y;
- 
-	data->y = 0;
-	while (data->y < data->height)
+
+	d->y = 0;
+	while (d->y < d->height)
 	{
-		data->x = 0;
-		while (data->x < data->width)
+		d->x = 0;
+		while (d->x < d->width)
 		{
-			t_x = data->x;
-			t_y = data->y;
-			if(data->x < data->width - 1)
-				bresenham(data->x + 1, data->y, data);
-			data->x = t_x;
-			data->y = t_y;
-			if(data->y < data->height - 1)
-				bresenham(data->x, data->y + 1, data);
-			data->x = t_x;
-			data->y = t_y;
-			data->x++;
+			t_x = d->x;
+			t_y = d->y;
+			if(d->x < d->width - 1)
+				bresenham(d->x + 1, d->y, d);
+			d->x = t_x;
+			d->y = t_y;
+			if(d->y < d->height - 1)
+				bresenham(d->x, d->y + 1, d);
+			d->x = t_x;
+			d->y = t_y;
+			d->x++;
 		}
-		data->y++;
+		d->y++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->image.img, 0, 0);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->image.img, 0, 0);
 }

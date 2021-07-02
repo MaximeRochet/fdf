@@ -6,7 +6,7 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:03:51 by mrochet           #+#    #+#             */
-/*   Updated: 2021/06/29 17:22:55 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/02 16:53:52 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*read_file(char *fichier, t_data *data)
 	read_value = 1;
 	while (read_value)
 	{
+	//	if(fc)
+	//		printf("%d len = %zu \n", read_value, ft_strlen(fc));
 		read_value = read(fd, &buffer, 99);
 		buffer[read_value] = '\0';
 		tmp = ft_strjoin(fc, buffer);
@@ -71,12 +73,12 @@ int **malloc_array(char **tab, t_data *data)
 	size_array(tab, data);
 	
 	y = data->height;
-	array = ft_calloc(sizeof(int *), data->height + 1);
+	array = ft_calloc(sizeof(int *), data->height);
 	if (!array)
 		return(NULL);
 	while(y >= 0)
 	{
-		array[y] = ft_calloc(sizeof(int), data->width + 1);
+		array[y] = ft_calloc(sizeof(int), data->width);
 		if(!array[y])
 			return(NULL);
 		y--;
@@ -124,17 +126,18 @@ int **create_array(int ac, char **av, t_data *data)
 	//verif dossier
 	map = read_file(av[1], data);
 	tab = ft_split(map, '\n');
+	free(map);
 	i = -1;
 	array = fill_array(tab, data);
+	free(tab);
 	y = -1;
-	
+	printf("hei = %d wid = %d\n", data->height, data->width);	
 	while(++y < data->height)
 	{
 		printf("array[%d] ", y);
 		i = -1;
-		while(i < data->width)
+		while(++i < data->width )
 		{
-			i++;
 			printf("%d " , array[y][i]);
 		}
 		printf("\n");

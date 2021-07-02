@@ -6,7 +6,7 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:01:43 by mrochet           #+#    #+#             */
-/*   Updated: 2021/06/30 17:27:49 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/01 12:31:45 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "../minilibx_opengl_20191021/mlx.h"
 # include "../libft/libft.h"

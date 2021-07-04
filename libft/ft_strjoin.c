@@ -6,7 +6,7 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 12:23:38 by mrochet           #+#    #+#             */
-/*   Updated: 2021/06/24 13:56:37 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/03 18:00:41 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!ret)
 		return (0);
 	if (s1)
+	{
 		while (s1[i])
 		{
 			ret[i] = s1[i];
 			i++;
 		}
+	}
 	while (s2[y])
 		ret[i++] = s2[y++];
 	ret[i] = '\0';

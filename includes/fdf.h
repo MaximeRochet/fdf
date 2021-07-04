@@ -6,23 +6,24 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:01:43 by mrochet           #+#    #+#             */
-/*   Updated: 2021/07/01 12:31:45 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/03 17:36:34 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <stdio.h>
-#include <math.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <stdio.h>
+# include <math.h>
 
-#include "../minilibx_opengl_20191021/mlx.h"
+# include "../minilibx_opengl_20191021/mlx.h"
 # include "../libft/libft.h"
 
 typedef struct s_img
@@ -39,19 +40,19 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	int 	**array;
+	int		**array;
 	int		zoom;
 	int		height;
-	int 	width;
-	int 	color;
+	int		width;
+	int		color;
 	int		xwin;
 	int		ywin;
-	double 	x;
+	double	x;
 	double	y;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_img 	image;
+	t_img	image;
 }				t_data;
 
 char	*read_file(char *fichier, t_data *data);

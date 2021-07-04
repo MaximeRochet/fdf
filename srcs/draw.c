@@ -6,7 +6,7 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:42:11 by mrochet           #+#    #+#             */
-/*   Updated: 2021/07/02 16:34:31 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/03 18:38:18 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ void	calc(t_data *data, double *x, double *y, int z)
 	*y = (*x + *y) * sin(0.8) - z;
 	*x *= 20;
 	*y *= 20;
-	*x += 1000;
-	*y += 700;
+	*x += 1250;
+	*y += 600;
 }
 
-void bresenham(double x1, double y1, t_data *data)
+void	bresenham(double x1, double y1, t_data *data)
 {
-	long long int z;
-	long long int z1;
+	long long int	z;
+	long long int	z1;
 
 	z = data->array[(int)data->y][(int)data->x];
 	z1 = data->array[(int)y1][(int)x1];
 	data->color = 0xFFFFFF;
 	if (z || z1)
-		data->color = 0xFF0000 + z * 0x00FF00 + z * 0x0000FF;
+		data->color = 0xFF0000 + z * 0x00FFFF + z * 0x0000FF;
 	calc(data, &data->x, &data->y, z);
 	calc(data, &x1, &y1, z1);
 	z1 = max(mod(x1 - data->x), mod(y1 - data->y));
@@ -64,10 +64,10 @@ void bresenham(double x1, double y1, t_data *data)
 	}
 }
 
-void draw(t_data *d)
+void	draw(t_data *d)
 {
-	double t_x;
-	double t_y;
+	double	t_x;
+	double	t_y;
 
 	d->y = 0;
 	while (d->y < d->height)
@@ -77,11 +77,11 @@ void draw(t_data *d)
 		{
 			t_x = d->x;
 			t_y = d->y;
-			if(d->x < d->width - 1)
+			if (d->x < d->width - 1)
 				bresenham(d->x + 1, d->y, d);
 			d->x = t_x;
 			d->y = t_y;
-			if(d->y < d->height - 1)
+			if (d->y < d->height - 1)
 				bresenham(d->x, d->y + 1, d);
 			d->x = t_x;
 			d->y = t_y;

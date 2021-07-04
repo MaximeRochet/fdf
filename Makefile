@@ -6,7 +6,7 @@
 #    By: mrochet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/25 14:23:35 by mrochet           #+#    #+#              #
-#    Updated: 2021/06/30 14:34:37 by mrochet          ###   ########lyon.fr    #
+#    Updated: 2021/07/03 18:13:21 by mrochet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJS = $(addprefix $(OBJS_PATH)/, $(OBJS_NAME))
 
 RM		=	rm -f
 CC		=	gcc
-FSAN	=	-g -fsanitize=address
+#FSAN	=	-g -fsanitize=address
 #CFLAGS	=	-Wall -Werror -Wextra
 	
 

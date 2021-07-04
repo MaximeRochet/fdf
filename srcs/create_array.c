@@ -6,7 +6,7 @@
 /*   By: mrochet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:03:51 by mrochet           #+#    #+#             */
-/*   Updated: 2021/07/04 14:28:16 by mrochet          ###   ########lyon.fr   */
+/*   Updated: 2021/07/04 14:59:02 by mrochet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*read_file(char *fichier, t_data *data)
 	fc = NULL;
 	fd = open(fichier, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		exit(0);
 	read_value = 1;
 	while (read_value)
 	{
